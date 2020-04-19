@@ -1,0 +1,17 @@
+{
+  "name": "client_easyShop",
+  "displayName": "client_easyShop",
+  "expo": {
+    "name": "client_easyShop",
+    "slug": "client_easyShop",
+    "version": "1.0.0",
+    "platforms": [
+      "ios",
+      "android",
+      "web"
+    ],
+    "assetBundlePatterns": [
+      "**/*"
+    ]
+  }
+}
