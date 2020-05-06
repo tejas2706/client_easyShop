@@ -7,6 +7,7 @@ import { createStackNavigator } from '@react-navigation/stack';
 
 import TestScreen from './src/screens/TestScreen';
 import RetailerHome from './src/screens/RetailerHome';
+import { RetailerOrderProducts } from './src/screens/RetailerOrderProducts';
 
 export default function App() {
   return (
@@ -14,6 +15,7 @@ export default function App() {
       <Stack.Navigator>
         <Stack.Screen name="Home" component={TestScreen} />        
         <Stack.Screen name="RetailerHome" component={RetailerHome} />
+        <Stack.Screen name="Retailer Order Products" component={RetailerOrderProducts} />        
       </Stack.Navigator>
     </NavigationContainer>
   );

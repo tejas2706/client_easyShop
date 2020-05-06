@@ -21,14 +21,14 @@ export default class Cards extends Component {
 
             <View style={{...styles.RectangleShapeView,width:this.props.cardDimensions.width,height:this.props.cardDimensions.height,backgroundColor:this.props.backgroundColor}}>
                 <View style={styles.textWrapper}>
-                    <Image source={{uri:this.props.uri}} style={{width:wp("22%"), height:hp("11%"), borderRadius:20}}></Image>
+                    <Image source={{uri:this.props.uri}} style={{width:wp("22%"), height:hp("11%"), backgroundColor:"#ECEEEC", borderRadius:10}}></Image>
                     <View style={{flexDirection:"column", paddingLeft:7, width:wp("42%")}}>
-                        <Text style={{...styles.category, color:this.props.color, fontSize:this.props.textSize.fontSize}}>{this.props.title}</Text>
-                        <Text style={{...styles.category, color:this.props.color, fontSize:this.props.textSize.fontSize}}>Price: {this.props.price}</Text>
-                        <Text style={{...styles.category, color:this.props.color, fontSize:this.props.textSize.fontSize}}>Qty avl: {this.props.quantity}</Text>
+                        <Text style={{...styles.category, color:this.props.color, fontWeight:this.props.fontWeight, fontSize:this.props.textSize.fontSize}}>{this.props.title}</Text>
+                        <Text style={{...styles.category, color:this.props.color, fontWeight:this.props.fontWeight, fontSize:this.props.textSize.fontSize}}>Price: {this.props.price}</Text>
+                        <Text style={{...styles.category, color:this.props.color, fontWeight:this.props.fontWeight, fontSize:this.props.textSize.fontSize}}>Qty avl: {this.props.quantity}</Text>
                     </View>
                     <View alignSelf="center">
-                        <Button backgroundColor="#25D557" buttonTitle="Add"></Button>
+                        <Button backgroundColor="#4CAF50" buttonTitle="Add" onPress={this.props.onPress}></Button>
                     </View>
                 </View>
             </View>

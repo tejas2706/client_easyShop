@@ -7,7 +7,7 @@ export default class Button extends Component{
 
     render(){
         return (
-            <TouchableOpacity style={{...styles.buttonStyles, backgroundColor:this.props.backgroundColor }} onPress={this.AddButton}>
+            <TouchableOpacity style={{...styles.buttonStyles, backgroundColor:this.props.backgroundColor }} onPress={this.props.onPress}>
                 <Text>
                     {this.props.buttonTitle}
                 </Text>

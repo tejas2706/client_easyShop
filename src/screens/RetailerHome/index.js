@@ -38,6 +38,9 @@ export default class RetailerHome extends Component {
 				"src": "https://images.ctfassets.net/oe48y40ukei6/3PNis6ONrOsoaCYuQ2WC2Y/f38c1128971a10f524ee0b17e9b96c58/Olay.jpg"
 			}
 		};
+		const products = () =>{
+			this.props.navigation.navigate("Retailer Order Products")
+		}
 		return (
 			// <SafeAreaView>
 			<ScrollView style={styles.screenStyles}>
@@ -46,7 +49,7 @@ export default class RetailerHome extends Component {
 						Object.keys(categories).map((_eachCategory, index) =>
 							(<View style={{ width: wp("50%"), height: hp("14%"), justifyContent: "center", alignItems: "center" }}>
 								{/* <Text>Test2</Text> */}
-								<Cards category="true" backgroundColor="white" fontWeight="bold" title={_eachCategory} textSize={{ fontSize: hp("1.8%") }} uri={categories[_eachCategory]["src"]} />
+								<Cards category="true" onPress={products} backgroundColor="white" fontWeight="bold" title={_eachCategory} textSize={{ fontSize: hp("1.8%") }} uri={categories[_eachCategory]["src"]} />
 							</View>)
 						)
 					}
