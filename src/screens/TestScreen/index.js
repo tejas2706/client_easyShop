@@ -6,11 +6,17 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 
 
 export default class Testscreen extends Component{
+  constructor(props) {
+    super(props);
+}
   render(){
+    const pressMe = () =>{
+      console.log("Hi")
+      this.props.navigation.navigate('RetailerHome')
+    }
     return (
       <View style={styles.container}>
-        <Cards category ="true" backgroundColor="#FF7D7D" color="white" title="Baby Care" textSize={{fontSize:hp("3%")}} uri="https://pbs.twimg.com/profile_images/486929358120964097/gNLINY67_400x400.png"/>
-        <Cards products="true" backgroundColor="white" cardDimensions={{width:wp("95%"), height:wp("25%")}} uri="https://pbs.twimg.com/profile_images/486929358120964097/gNLINY67_400x400.png" title="Pampers" price="200" quantity="300" textSize={{fontSize:hp("2.3%")}}/>
+        <Cards category ="true" backgroundColor="#FF7D7D" color="white" title="Retailer" textSize={{fontSize:hp("3%")}} onPress={pressMe}/>
       </View>
       
     );
