@@ -12,7 +12,7 @@ export default class Cards extends Component {
 
             <TouchableOpacity style={{...styles.RectangleShapeView,backgroundColor:this.props.backgroundColor}}>
                 <View style={styles.textWrapper}>
-                    <Text style={{...styles.category, color:this.props.color, fontSize:this.props.textSize.fontSize}}>{this.props.title}</Text>
+                    <Text style={{...styles.category, color:this.props.color, fontWeight:this.props.fontWeight, fontSize:this.props.textSize.fontSize}}>{this.props.title}</Text>
                     <Image source={{uri:this.props.uri}} style={{width:wp("24%"), height:hp("11%"), borderRadius:20}}></Image>
                 </View>
             </TouchableOpacity>
