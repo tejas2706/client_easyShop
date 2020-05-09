@@ -2,7 +2,7 @@ import Cards from '../../components/Cards';
 import { View, ScrollView, StyleSheet, Text, SafeAreaView } from 'react-native';
 import React, { Component } from 'react';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-
+import Banner from '../../components/Banner'
 
 export default class RetailerHome extends Component {
 	constructor(props) {
@@ -44,6 +44,7 @@ export default class RetailerHome extends Component {
 		return (
 			// <SafeAreaView>
 			<ScrollView style={styles.screenStyles}>
+				<Banner />
 				<View style={{ flex: 1, flexDirection: "row", flexWrap: "wrap", justifyContent: "center", alignItems: "center", alignContent: "space-between" }}>
 					{
 						Object.keys(categories).map((_eachCategory, index) =>
