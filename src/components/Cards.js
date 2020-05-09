@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { View, StyleSheet, Text, TouchableOpacity, Image } from 'react-native';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Button from './Button';
+import NumericInput from 'react-native-numeric-input'
 
 export default class Cards extends Component {
     
@@ -24,12 +25,30 @@ export default class Cards extends Component {
                     <Image source={{uri:this.props.uri}} style={{width:wp("22%"), height:hp("11%"), backgroundColor:"#ECEEEC", borderRadius:10}}></Image>
                     <View style={{flexDirection:"column", paddingLeft:7, width:wp("42%")}}>
                         <Text style={{...styles.category, color:this.props.color, fontWeight:this.props.fontWeight, fontSize:this.props.textSize.fontSize}}>{this.props.title}</Text>
-                        <Text style={{...styles.category, color:this.props.color, fontWeight:this.props.fontWeight, fontSize:this.props.textSize.fontSize}}>Price: {this.props.price}</Text>
-                        <Text style={{...styles.category, color:this.props.color, fontWeight:this.props.fontWeight, fontSize:this.props.textSize.fontSize}}>Qty avl: {this.props.quantity}</Text>
+                        <Text style={{...styles.category, color:this.props.color, fontWeight:this.props.fontWeight, fontSize:this.props.textSize.fontSize}}>{this.props.field1} {this.props.price}</Text>
+                        <Text style={{...styles.category, color:this.props.color, fontWeight:this.props.fontWeight, fontSize:this.props.textSize.fontSize}}>{this.props.field2} {this.props.quantity}</Text>
                     </View>
+
+                    {this.props.buttonToShow?
                     <View alignSelf="center">
                         <Button backgroundColor="#4CAF50" buttonTitle="Add" onPress={this.props.onPress}></Button>
+										</View>:
+										<View alignSelf="center">
+										 <NumericInput 
+										 value="2" 
+										 onChange={value => console.log("hi", value)} 
+										 totalWidth={wp("25%")} 
+										 totalHeight={hp("5%")} 
+										 iconSize={wp("10%")}
+										 step={1}
+										 valueType='real'
+										 rounded 
+										 textColor='#B0228C' 
+										 iconStyle={{ color: 'white' }} 
+										 rightButtonBackgroundColor='#EA3788' 
+										 leftButtonBackgroundColor='#E56B70'/>
                     </View>
+                }
                 </View>
             </View>
 
