@@ -10,11 +10,13 @@ import RetailerHome from './src/screens/RetailerHome';
 import { RetailerOrderProducts } from './src/screens/RetailerOrderProducts';
 import SoldItems from './src/screens/SoldItems';
 import {CurrentStock} from './src/screens/CurrentStock';
+import { Cart } from './src/screens/Cart';
 
 export default function App() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
+      <Stack.Screen name="Cart" component={Cart} />        
         <Stack.Screen name="My Stock" component={CurrentStock} />        
         <Stack.Screen name="Home" component={TestScreen} />        
         <Stack.Screen name="RetailerHome" component={RetailerHome} />
