@@ -39,7 +39,7 @@ class BarcodeScanner extends React.PureComponent {
           type={type}
           style={styles.preview}
           // onGoogleVisionBarcodesDetected={this.onBarCodeRead}
-          onBarCodeRead={this.onBarCodeRead}
+          onBarCodeRead={this.props.onBarCodeRead}
         />
         <View style={styles.camButtons}>
           <TouchableOpacity onPress={this.takePhoto} style={styles.recordingButton}>

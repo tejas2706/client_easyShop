@@ -14,13 +14,18 @@ export default class NewOrder extends Component {
       <View style={styles.container}>
         {this.state.BarcodeScanning ?
         <View>
-          <BarcodeScanner getCode={()=>this.getCode()}></BarcodeScanner>
+          <BarcodeScanner onBarCodeRead={(e) => this.props.onBarCodeRead(e)} getCode={()=>this.getCode()}></BarcodeScanner>
         </View>:
         <Button buttonTitle="Create New Order" onPress={()=>this.onPress()} ></Button>
           
         }
       </View>
     );
+  }
+
+
+  onBarCodeRead = (e) =>{
+    Alert.alert("...................",e)
   }
 
   onPress = async () =>{
