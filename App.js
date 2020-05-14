@@ -12,22 +12,18 @@ import SoldItems from './src/screens/SoldItems';
 import {CurrentStock} from './src/screens/CurrentStock';
 import { Cart } from './src/screens/Cart';
 import NewOrder from './src/screens/NewOrder';
+import Router from './Router';
+import createReduxStore from './src/redux/store'
+import { Provider } from 'react-redux'
 
 export default function App() {
+
+  const store = createReduxStore()
   return (
-    <NavigationContainer>
-      <Stack.Navigator>
-        <Stack.Screen name="NewOrder" component={NewOrder} />        
-        <Stack.Screen name="Cart" component={Cart} />        
-        <Stack.Screen name="My Stock" component={CurrentStock} />        
-        <Stack.Screen name="Home" component={TestScreen} />        
-        <Stack.Screen name="RetailerHome" component={RetailerHome} />
-        <Stack.Screen name="Retailer Order Products" component={RetailerOrderProducts} />        
-        <Stack.Screen name="SoldItems" component={SoldItems} />   
-      </Stack.Navigator>
-    </NavigationContainer>
+    <Provider store={store}>
+      <Router />
+    </Provider>
   );
 }
 
-const Stack = createStackNavigator();
 
