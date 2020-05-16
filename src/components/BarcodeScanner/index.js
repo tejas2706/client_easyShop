@@ -38,19 +38,24 @@ class BarcodeScanner extends React.PureComponent {
           }}
           type={type}
           style={styles.preview}
-          // onGoogleVisionBarcodesDetected={this.onBarCodeRead}
+          // onGoogleVisionBarcodesDetected={this.props.onBarCodeRead({barcodes})}
           onBarCodeRead={this.props.onBarCodeRead}
+          androidCameraPermissionOptions={{
+            title: 'Permission to use camera',
+            message: 'We need your permission to use your camera to allow scanning the barcode.',
+            buttonPositive: 'Ok',
+            buttonNegative: 'Cancel',
+          }}
         />
         <View style={styles.camButtons}>
-          <TouchableOpacity onPress={this.takePhoto} style={styles.recordingButton}>
-            <Icon name="camera" size={50} color="white" />
-          </TouchableOpacity>
           <TouchableOpacity onPress={this.flipCamera} style={styles.flipButton}>
             <Icon name="refresh" size={40} color="white" />
           </TouchableOpacity>
         </View>
-        <View style={styles.listItems}>
-        </View>
+          {/* <TouchableOpacity onPress={this.takePhoto} style={styles.recordingButton}>
+            <Icon name="camera" size={50} color="white" />
+          </TouchableOpacity> */}
+        
       </View>
     );
   }

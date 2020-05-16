@@ -18,14 +18,13 @@ const styles = StyleSheet.create({
     camButtons: {
       width: Dimensions.get('window').width,
       height: heightPercentageToDP("15%"),
-      justifyContent:"space-between",
+      justifyContent:"flex-end",
+      alignItems:"flex-end",
       flexDirection:"row",
-      backgroundColor:"black"
+      // backgroundColor:"black"
     },
   
     flipButton: {
-      alignSelf:"center",
-      alignContent:"flex-end",
       marginRight:widthPercentageToDP("5%")
     },
     recordingButton: {
