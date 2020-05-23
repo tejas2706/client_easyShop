@@ -57,7 +57,7 @@ export default class NewOrder extends Component {
       <View style={styles.container}>
         {this.state.BarcodeScanning ?
           <View>
-            <BarcodeScanner onBarCodeRead={(e) => this.onBarCodeRead(e)} ></BarcodeScanner>
+            <BarcodeScanner flipCamButton={true} onBarCodeRead={(e) => this.onBarCodeRead(e)} ></BarcodeScanner>
             <View style={styles.innerContainer}>
               <ScrollView style={styles.listItems}>
                 {

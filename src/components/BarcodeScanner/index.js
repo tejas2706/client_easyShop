@@ -47,11 +47,14 @@ class BarcodeScanner extends React.PureComponent {
             buttonNegative: 'Cancel',
           }}
         />
+        {this.props.flipCamButton? 
         <View style={styles.camButtons}>
           <TouchableOpacity onPress={this.flipCamera} style={styles.flipButton}>
             <Icon name="refresh" size={40} color="white" />
           </TouchableOpacity>
-        </View>
+        </View>:
+        <View></View>
+        }
           {/* <TouchableOpacity onPress={this.takePhoto} style={styles.recordingButton}>
             <Icon name="camera" size={50} color="white" />
           </TouchableOpacity> */}

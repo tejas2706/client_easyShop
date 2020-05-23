@@ -10,16 +10,18 @@ import SoldItems from './src/screens/SoldItems';
 import CurrentStock from './src/screens/CurrentStock';
 import { Cart } from './src/screens/Cart';
 import NewOrder from './src/screens/NewOrder';
+import AddProducts from './src/screens/AddProducts'
 
 export default function Router() {
   return (
     <NavigationContainer>
       <Stack.Navigator>
-        {/* <Stack.Screen name="My Stock" component={CurrentStock} />  */}
+        <Stack.Screen name="AddProducts" component={AddProducts} /> 
+        <Stack.Screen name="Cart" component={Cart} /> 
+        <Stack.Screen name="My Stock" component={CurrentStock} /> 
         <Stack.Screen name="SoldItems" component={SoldItems} />   
         <Stack.Screen name="Retailer Order Products" component={RetailerOrderProducts} />        
         <Stack.Screen name="RetailerHome" component={RetailerHome} />
-        <Stack.Screen name="Cart" component={Cart} /> 
         <Stack.Screen name="NewOrder" component={NewOrder} />        
         <Stack.Screen name="Home" component={TestScreen} />        
       </Stack.Navigator>
