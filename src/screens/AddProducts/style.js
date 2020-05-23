@@ -87,7 +87,7 @@ export default StyleSheet.create({
     modalInfoBox:{
         // paddingTop:hp("1%"),
         width:wp("70%"),
-        height:hp("12%"),
+        // height:hp("12%"),
         borderWidth:2
     },
     openButton: {

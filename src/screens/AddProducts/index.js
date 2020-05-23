@@ -9,18 +9,32 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 
 export default class AddProducts extends Component {
-    state = {
-        BarcodeScanning: false,
-        editPressed:false,
-        products: {
-            "8902102230519": {
-                "productName": "Margo Soap",
-                "price": 120,
-                "brand": "Masta brand",
-                "qty": 100
-            }
+
+    constructor(props){
+        super(props);
+        this.state = {
+            BarcodeScanning: false,
+            editPressed:false,
+            products: {
+                "8902102230519": {
+                    "productName": "Margo Soap",
+                    "price": 120,
+                    "brand": "Masta brand",
+                    "qty": 100
+                },
+                "8902579103409":{
+                    "productName": "Appy Fizz",
+                    "price": 10,
+                    "brand": "Parle Agro",
+                    "qty": 100
+                }
+            },
+            data: "",
+            modalVisible: false,
+            showProdDetails: false
         }
     }
+    
 
     render() {
         return (
@@ -48,24 +62,24 @@ export default class AddProducts extends Component {
                                                 this.state.editPressed?
                                                 <View style={styles.modalInfoBox}>
                                                     <Text style={styles.modalTextStyle}>Product already exists</Text>                                                    
-                                                    <TextInput style={styles.modalTextStyle}><Text>Product Name:</Text> {this.state.products[this.state.data].productName}</TextInput>
-                                                    <TextInput style={styles.modalTextStyle}><Text>Brand:</Text> {this.state.products[this.state.data].brand}</TextInput>
+                                                    <TextInput style={styles.modalTextStyle} placeholder="Product Name:" >{this.state.products[this.state.data].productName}</TextInput>
+                                                    <TextInput style={styles.modalTextStyle} placeholder="Brand:">{this.state.products[this.state.data].brand}</TextInput>
                                                 </View>
                                                 :
                                                 this.state.products[this.state.data]?
                                                 (
                                                     <View style={styles.modalInfoBox}>
                                                         <Text style={styles.modalTextStyle}>Product already exists</Text>
-                                                        <Text style={styles.modalTextStyle}>Product Name:{this.state.products[this.state.data].productName}</Text>
-                                                        <Text style={styles.modalTextStyle}>Brand: {this.state.products[this.state.data].brand}</Text>
+                                                        <Text style={styles.modalTextStyle}>{this.state.products[this.state.data].productName}</Text>
+                                                        <Text style={styles.modalTextStyle}>{this.state.products[this.state.data].brand}</Text>
                                                     </View>
                                                 )
                                                 :
                                                 (
                                                     <View style={styles.modalInfoBox}>
                                                         <Text style={styles.modalTextStyle}>Add Product</Text>                                                    
-                                                        <TextInput style={styles.modalTextStyle}><Text>Product Name:</Text></TextInput>
-                                                        <TextInput style={styles.modalTextStyle}><Text>Brand:</Text></TextInput>
+                                                        <TextInput style={styles.modalTextStyle} placeholder="Product Name:" ></TextInput>
+                                                        <TextInput style={styles.modalTextStyle} placeholder="Brand:" ></TextInput>
                                                     </View>
                                                 )
                                             }
