@@ -5,6 +5,7 @@ import Icon from 'react-native-vector-icons/MaterialIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import { connect } from 'react-redux'
 import {generateBillAction} from '../../redux/actions'
+const appendToFile = require("../../utils/appendToFile.js");
 
 class Cart extends Component {
     constructor(props) {
@@ -63,14 +64,26 @@ class Cart extends Component {
     }
 
 
-    generateBill = () => {
+    generateBill = async () => {
       let orderDetails = {
         orderId: Math.floor(Math.random() * 10000),// Generate a random number
         products: this.props.cartItems,
         dateOfOrder: new Date().toISOString(),
         status: "pending",
+        locationId: "1"
       }
-      this.props.generateBill(orderDetails)
+      await fetch('https://d799bde8.ngrok.io/writeFile',{
+          method: "POST",
+          headers: {
+            Accept: 'application/json',
+            'Content-Type': 'application/json'
+          },
+          body: JSON.stringify({
+              fileName: "orders.json",
+              data: orderDetails
+            })
+        });
+        //   this.props.generateBill(orderDetails)
       this.props.navigation.navigate("PastOrders")
     }
 
