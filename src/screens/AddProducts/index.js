@@ -7,7 +7,6 @@ import { ScrollView, TextInput } from 'react-native-gesture-handler';
 const _ = require("lodash");
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
-const config = require("../../config.json");
 
 export default class AddProducts extends Component {
 
@@ -17,18 +16,18 @@ export default class AddProducts extends Component {
             BarcodeScanning: false,
             editPressed:false,
             products: {
-                // "8902102230519": {
-                //     "productName": "Margo Soap",
-                //     "price": 120,
-                //     "brand": "Masta brand",
-                //     "qty": 100
-                // },
-                // "8902579103409":{
-                //     "productName": "Appy Fizz",
-                //     "price": 10,
-                //     "brand": "Parle Agro",
-                //     "qty": 100
-                // }
+                "8902102230519": {
+                    "productName": "Margo Soap",
+                    "price": 120,
+                    "brand": "Masta brand",
+                    "qty": 100
+                },
+                "8902579103409":{
+                    "productName": "Appy Fizz",
+                    "price": 10,
+                    "brand": "Parle Agro",
+                    "qty": 100
+                }
             },
             data: "",
             modalVisible: false,
@@ -36,23 +35,6 @@ export default class AddProducts extends Component {
         }
     }
     
-
-  async componentWillMount(){
-    console.log("......................................")
-    let res = await fetch(`${config.apiUrl}/readFile?filename=products.json`,{
-      method: "GET"
-    })
-
-    let response = await res.json();
-    console.log("PastOrders -> componentWillMount -> response", response)
-    let allProducts = {}
-    if(!_.isEmpty(response.data)){
-        response.data.map((each)=>{
-            allProducts[each["barcodeId"]] = each
-        })
-    }
-    await this.setState({products: allProducts})
-  }
 
     render() {
         return (
@@ -77,30 +59,27 @@ export default class AddProducts extends Component {
                                 <View style={styles.centeredView}>
                                     <View style={styles.modalView}>
                                             {
-                                                this.state.products[this.state.data]?
+                                                this.state.editPressed?
                                                 <View style={styles.modalInfoBox}>
                                                     <Text style={styles.modalTextStyle}>Product already exists</Text>                                                    
-                                                    <TextInput style={styles.modalTextStyle} placeholder="Product Name:" onChangeText={(e)=> this.setState({"editedProd":{...this.state.editedProd,"name":e}})}>{this.state.products[this.state.data].name}</TextInput>
-                                                    <TextInput style={styles.modalTextStyle} placeholder="Price:" onChangeText={(e)=> this.setState({"editedProd":{...this.state.editedProd,"price":e}})}>{this.state.products[this.state.data].price}</TextInput>
-                                                    <TextInput style={styles.modalTextStyle} placeholder="Quantity:" onChangeText={(e)=> this.setState({"editedProd":{...this.state.editedProd,"qtyAvl":e}})}>{this.state.products[this.state.data].qtyAvl}</TextInput>
+                                                    <TextInput style={styles.modalTextStyle} placeholder="Product Name:" >{this.state.products[this.state.data].productName}</TextInput>
+                                                    <TextInput style={styles.modalTextStyle} placeholder="Brand:">{this.state.products[this.state.data].brand}</TextInput>
                                                 </View>
                                                 :
-                                                // this.state.products[this.state.data]?
-                                                // (
-                                                //     <View style={styles.modalInfoBox}>
-                                                //         <Text style={styles.modalTextStyle}>Product already exists</Text>
-                                                //         <Text style={styles.modalTextStyle}>{this.state.products[this.state.data].name}</Text>
-                                                //         <Text style={styles.modalTextStyle}>{this.state.products[this.state.data].price}</Text>
-                                                //         <Text style={styles.modalTextStyle}>{this.state.products[this.state.data].qtyAvl}</Text>
-                                                //     </View>
-                                                // )
-                                                // :
+                                                this.state.products[this.state.data]?
+                                                (
+                                                    <View style={styles.modalInfoBox}>
+                                                        <Text style={styles.modalTextStyle}>Product already exists</Text>
+                                                        <Text style={styles.modalTextStyle}>{this.state.products[this.state.data].productName}</Text>
+                                                        <Text style={styles.modalTextStyle}>{this.state.products[this.state.data].brand}</Text>
+                                                    </View>
+                                                )
+                                                :
                                                 (
                                                     <View style={styles.modalInfoBox}>
                                                         <Text style={styles.modalTextStyle}>Add Product</Text>                                                    
-                                                        <TextInput style={styles.modalTextStyle} placeholder="Product Name:" onChangeText={(e)=> this.setState({"editedProd":{...this.state.editedProd,"name":e}})}></TextInput>
-                                                        <TextInput style={styles.modalTextStyle} placeholder="Price:" onChangeText={(e)=> this.setState({"editedProd":{...this.state.editedProd,"price":e}})}></TextInput>
-                                                        <TextInput style={styles.modalTextStyle} placeholder="Quantity:" onChangeText={(e)=> this.setState({"editedProd":{...this.state.editedProd,"qtyAvl":e}})}></TextInput>
+                                                        <TextInput style={styles.modalTextStyle} placeholder="Product Name:" ></TextInput>
+                                                        <TextInput style={styles.modalTextStyle} placeholder="Brand:" ></TextInput>
                                                     </View>
                                                 )
                                             }
@@ -108,18 +87,10 @@ export default class AddProducts extends Component {
                                         <TouchableHighlight
                                             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
                                             onPress={() => {
-                                                fetch(`${config.apiUrl}/addProduct`,{
-                                                    method: "POST",
-                                                    headers: {
-                                                        Accept: 'application/json',
-                                                        'Content-Type': 'application/json'
-                                                      },
-                                                      body: JSON.stringify(this.state.editedProd)
-                                                })
-                                                // this.setState({ "editPressed": true })
+                                                this.setState({ "editPressed": true })
                                             }}
                                         >
-                                            <Text style={styles.textStyle}>Save</Text>
+                                            <Text style={styles.textStyle}>{this.state.products[this.state.data]?"Edit":"Save"}</Text>
                                         </TouchableHighlight>
                                         <TouchableHighlight
                                             style={{ ...styles.openButton, backgroundColor: "#2196F3" }}
@@ -144,8 +115,30 @@ export default class AddProducts extends Component {
         );
     }
 
+
+    removeProduct = (eachProd) => {
+        Alert.alert(
+            'Remove product',
+            'Are you sure you want to remove this product?',
+            [
+                {
+                    text: 'Cancel',
+                    onPress: () => console.log('Cancel Pressed'),
+                    style: 'cancel',
+                },
+                {
+                    text: 'Remove', onPress: async () => {
+                        delete this.state.cart[eachProd];
+                        this.setState({ "cart": this.state.cart })
+                    }
+                },
+            ]
+        );
+    }
+
+
+
     onBarCodeRead = async (e) => {
-        
         console.log("NewOrder -> onBarCodeRead -> e.data", e.data)
         if (this.state.products[e.data]) {
             console.log("-----------EXISTS-------------------")
@@ -160,7 +153,7 @@ export default class AddProducts extends Component {
                     },
                     {
                         text: 'Edit', onPress: async () => {
-                            this.setState({ "showProdDetails": true , "editedProd":{ "barcodeId":e.data } ,"modalVisible":true, data:e.data, "BarcodeScanning":false})
+                            this.setState({ "showProdDetails": true , "modalVisible":true, data:e.data, "BarcodeScanning":false})
                             //   toBeInsertedProd[e.data]["qty"] = this.state.products[e.data]["qty"] + 1
                             //   this.setState({ "cart": { ...this.state.products, ...toBeInsertedProd } })
                         }
@@ -180,7 +173,7 @@ export default class AddProducts extends Component {
                     },
                     {
                         text: 'Add', onPress: async () => {
-                            this.setState({ "showProdDetails": true ,  "editedProd":{ "barcodeId":e.data } ,"modalVisible":true, data:e.data, "BarcodeScanning":false})
+                            this.setState({ "showProdDetails": true , "modalVisible":true, data:e.data, "BarcodeScanning":false})
                         }
                     }
                 ]

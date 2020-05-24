@@ -45,6 +45,4 @@ target 'clienteasyShop' do
   use_native_modules!
   pod 'react-native-camera', :path => '../node_modules/react-native-camera'
 
-
-
 end

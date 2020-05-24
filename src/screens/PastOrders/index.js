@@ -23,21 +23,8 @@ class PastOrders extends Component {
         { id: "8",  orderId: "PG-10001", dateOfOrder: "2020-01-20", status: "cleared", statusColor: "green", image: require('./images/shoppingBags.jpg') },
         { id: "9",  orderId: "PG-999", dateOfOrder: "2019-12-29", status: "cleared", statusColor: "green", image: require('./images/shoppingBags.jpg') },
         { id: "10", orderId: "PG-872", dateOfOrder: "2019-11-10",status: "cleared", statusColor: "green", image: require('./images/shoppingBags.jpg') },
-      ],
-      orders:[]
+      ]
     };
-  }
-
-
-  async componentWillMount(){
-    console.log("......................................")
-    let res = await fetch("https://d799bde8.ngrok.io/readFile?filename=orders.json",{
-      method: "GET"
-    })
-
-    let response = await res.json();
-    console.log("PastOrders -> componentWillMount -> response", response)
-    await this.setState({orders: response.data})
   }
 
   renderItem = (item) => {
@@ -61,7 +48,7 @@ class PastOrders extends Component {
     return (
       <ScrollView>
         <View style={{ flex: 1 }} >
-          {this.state.orders.map(eachItem => {
+          {this.props.orders.map(eachItem => {
             return this.renderItem(eachItem)
           })}
         </View>

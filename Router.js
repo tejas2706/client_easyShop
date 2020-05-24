@@ -25,13 +25,13 @@ import Icon from 'react-native-vector-icons/FontAwesome';
 function StackRouterNavigation() {
   return (
     <Stack.Navigator> 
-        <Stack.Screen name="RetailerHome" component={RetailerHome} />
-        <Stack.Screen name="AddProducts" component={AddProducts} />     
-        <Stack.Screen name="Retailer Order Products" component={RetailerOrderProducts} />        
         <Stack.Screen name="Cart" component={Cart} /> 
         <Stack.Screen name="Home" component={TestScreen} />    
+        <Stack.Screen name="AddProducts" component={AddProducts} />     
         <Stack.Screen name="My Stock" component={CurrentStock} /> 
+        <Stack.Screen name="Retailer Order Products" component={RetailerOrderProducts} />        
         <Stack.Screen name="NewOrder" component={NewOrder} />        
+        <Stack.Screen name="RetailerHome" component={RetailerHome} />
         <Stack.Screen name="SoldItems" component={SoldItems} /> 
         <Stack.Screen name="PastOrders" component={PastOrder} />   
       </Stack.Navigator>
