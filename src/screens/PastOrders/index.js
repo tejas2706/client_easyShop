@@ -6,8 +6,9 @@ import {
   ScrollView,
 } from 'react-native';
 import styles from './style';
+import { connect } from 'react-redux'
 
-export default class PastOrders extends Component {
+class PastOrders extends Component {
 
   constructor(props) {
     super(props);
@@ -29,14 +30,14 @@ export default class PastOrders extends Component {
   renderItem = (item) => {
     return (
       <View style={styles.row}>
-        <Image source={item.image} style={styles.pic} />
+        <Image source={require('./images/shoppingBags.jpg')} style={styles.pic} />
         <View>
           <View style={styles.nameContainer}>
             <Text style={styles.nameTxt} numberOfLines={1} ellipsizeMode="tail">Order Number: {item.orderId}</Text>
             <Text style={styles.mblTxt}>{item.dateOfOrder}</Text>
           </View>
           <View style={styles.msgContainer}>
-            <Text style={{ ...styles.msgTxt, color: item.statusColor }}>{item.status}</Text>
+            <Text style={{ ...styles.msgTxt, color: 'red' }}>{item.status}</Text>
           </View>
         </View>
       </View>
@@ -47,7 +48,7 @@ export default class PastOrders extends Component {
     return (
       <ScrollView>
         <View style={{ flex: 1 }} >
-          {this.state.calls.map(eachItem => {
+          {this.props.orders.map(eachItem => {
             return this.renderItem(eachItem)
           })}
         </View>
@@ -56,3 +57,11 @@ export default class PastOrders extends Component {
   }
 }
 
+const mapStateToProps = (state) =>{
+  console.log("mapStateToProps -> state", state)
+  return {
+      orders : state.orders
+  }
+}
+
+export default connect(mapStateToProps)(PastOrders)

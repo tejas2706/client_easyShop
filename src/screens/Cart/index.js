@@ -1,11 +1,12 @@
 import React, { Component } from "react";
-import { Text, View, Image, ScrollView, Alert, Modal, TouchableHighlight } from 'react-native';
+import { Text, View, Image, ScrollView, Alert, Modal, TouchableHighlight, Button } from 'react-native';
 import styles from './style';
 import Icon from 'react-native-vector-icons/MaterialIcons';
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
+import { connect } from 'react-redux'
+import {generateBillAction} from '../../redux/actions'
 
-
-export class Cart extends Component {
+class Cart extends Component {
     constructor(props) {
         super(props)
         this.state = {
@@ -62,6 +63,18 @@ export class Cart extends Component {
     }
 
 
+    generateBill = () => {
+      let orderDetails = {
+        orderId: Math.floor(Math.random() * 10000),// Generate a random number
+        products: this.props.cartItems,
+        dateOfOrder: new Date().toISOString(),
+        status: "pending",
+      }
+      this.props.generateBill(orderDetails)
+      this.props.navigation.navigate("PastOrders")
+    }
+
+
     render() {
         return (
             <ScrollView >
@@ -70,12 +83,15 @@ export class Cart extends Component {
                         <Text style={{paddingLeft:wp("20%")}}>Products</Text>
                         <Text style={{paddingRight:wp("8%")}}>Amount</Text>
                     </View>
-                    {this.state.cart.map(each => {
+                    {this.props.cartItems.map(each => {
                         return this.renderItems(each)
                     })}
                 <View style={{height:hp("6%"), borderTopWidth:2,backgroundColor:"white", justifyContent:"flex-end", alignItems:"center", flexDirection:"row"}}>
                     <Text style={{paddingLeft:wp("20%")}}>Total:   </Text>
                     <Text style={{paddingRight:wp("8%")}}>{this.getProductsTotal()}</Text>
+                </View>
+                <View>
+                    <Button title="Place Order" onPress = {()=> this.generateBill()}/>
                 </View>
                 </View>
                 {
@@ -129,14 +145,14 @@ export class Cart extends Component {
             <View style={styles.innerContainer}>
                 <Image source={{ uri: eachItem.url }} style={styles.image}></Image>
                 <View style={styles.infoBox}>
-                    <Text style={styles.textStyle}>Price:{eachItem.price}</Text>
-                    <Text style={styles.textStyle}>Quantity: {eachItem.qty}</Text>
+                    <Text style={styles.textStyle}>Price:{100}</Text>
+                    <Text style={styles.textStyle}>Quantity: {eachItem.units}</Text>
                     <View style={styles.modify}>
                         <Icon name="delete" size={wp("4.5%")} color="#999999" onPress={() => { Alert.alert("Delete Icon Clicked") }} />
                         <Icon name="edit" size={wp("4.5%")} color="#999999" onPress={() => this.displayModal(eachItem)} />
                     </View>
                 </View>
-                    <Text style={styles.textStyle}>{parseInt(eachItem.price) * parseInt(eachItem.qty)}</Text>
+                    <Text style={styles.textStyle}>{parseInt(100) * parseInt(eachItem.units)}</Text>
             </View>
         )
     }
@@ -146,10 +162,28 @@ export class Cart extends Component {
     }
 
     getProductsTotal= () =>{
-        let total = this.state.cart.reduce((prev, eachItem)=>{
-            return prev+parseInt(eachItem.price) * parseInt(eachItem.qty)
+        let total = this.props.cartItems.reduce((prev, eachItem)=>{
+            return prev+parseInt(100) * parseInt(eachItem.units)
 
         },0)
     return <Text>{total}</Text>
     }
 }
+
+const mapStateToProps = (state) =>{
+      console.log("mapStateToProps -> state", state)
+      return {
+          cartItems : state.cartItems
+      }
+}
+
+const mapDispatchToProps = (dispatch)=>{
+
+  return {
+    generateBill: (orderDetails) => dispatch(generateBillAction(orderDetails))
+  }
+}
+
+
+
+export default connect( mapStateToProps,mapDispatchToProps)(Cart)

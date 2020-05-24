@@ -5,7 +5,7 @@ import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-nat
 import Cards from '../../components/Cards';
 const _ = require("lodash")
 
-export class RetailerOrderProducts extends Component {
+export default class RetailerOrderProducts extends Component {
 	constructor(props) {
 		super(props);
 	}
@@ -72,6 +72,21 @@ export class RetailerOrderProducts extends Component {
 			</ScrollView>
 		)
 	}
+}
+
+const mapStateToProps = (state) =>{
+  console.log("mapStateToProps -> state", state)
+	return {
+		cartItems : state.cartItems
+	}
+}
+
+
+const mapDispatchToProps = (dispatch) => {
+  return {
+		addToCart: (product) => dispatch(addToCartAction(product)),
+		removeFromCart: (productId) => dispatch(removeFromCartAction(productId))
+  }
 }
 
 const styles = StyleSheet.create({

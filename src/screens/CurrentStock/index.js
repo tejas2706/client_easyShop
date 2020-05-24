@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { ScrollView } from "react-native-gesture-handler";
-import { Text, StyleSheet, View, Alert } from "react-native";
+import { Text, StyleSheet, View, Alert, Button } from "react-native";
 import { widthPercentageToDP as wp, heightPercentageToDP as hp } from 'react-native-responsive-screen';
 import Cards from '../../components/Cards';
 import { SearchBar } from 'react-native-elements';
@@ -88,6 +88,7 @@ class CurrentStock extends Component {
 									(<View style={{ width: wp("100%"), height: hp("14%"), justifyContent: "center", alignItems: "center" }}>
 										<Cards products={true} cardDimensions={{ width: wp("95%"), height: hp("13%") }} backgroundColor="white" fontWeight="200" title={this.state.Products[_eachProduct].name} price={this.state.Products[_eachProduct].price} quantity={this.state.Products[_eachProduct].qtyAvl} textSize={{ fontSize: hp("2%") }} uri={this.state.Products[_eachProduct].url} onPress={() => addButton(_eachProduct)} buttonToShow={false} field2="Qty in stock:"
 										productId={this.state.Products[_eachProduct].id} addToCart={() => this.props.addToCart(this.state.Products[_eachProduct])} removeFromCart={() => { console.log("......................"); this.props.removeFromCart(this.state.Products[_eachProduct].id)}} />
+
 									</View>)
 								):
 
@@ -102,7 +103,8 @@ class CurrentStock extends Component {
 								(<View>
 									<Text>You ran out of stock.</Text>
 								</View>)
-					}		
+					}
+						<Button  title="Cart" onPress={()=> this.props.navigation.navigate("Cart")}/>
 					</View>
 					
 
@@ -112,8 +114,9 @@ class CurrentStock extends Component {
 }
 
 const mapStateToProps = (state) =>{
+  console.log("mapStateToProps -> state", state)
 	return {
-		cartItems : state.cartItems.cartItems
+		cartItems : state.cartItems
 	}
 }
 
