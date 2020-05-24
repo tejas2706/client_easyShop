@@ -44,6 +44,12 @@ export default function Router() {
       <Drawer.Navigator>
         <Drawer.Screen name="Home" component={StackRouterNavigation} />
         <Drawer.Screen name="Profile" component={Profile} />
+        <Drawer.Screen name="PastOrders" component={PastOrder} />
+        <Drawer.Screen name="Retailer Order Products" component={RetailerOrderProducts} /> 
+        <Drawer.Screen name="AddProducts" component={AddProducts} />  
+        <Drawer.Screen name="My Stock" component={CurrentStock} /> 
+        <Drawer.Screen name="SoldItems" component={SoldItems} /> 
+        <Drawer.Screen name="Cart" component={Cart} />
       </Drawer.Navigator>
     </NavigationContainer>
   );
